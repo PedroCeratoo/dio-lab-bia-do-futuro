@@ -1,147 +1,168 @@
-# 🤖 Agente Financeiro Inteligente com IA Generativa
+# 🇧🇷💸Apertô - Agente de Controle Financeiro do Cotidiano com IA Generativa
 
 ## Contexto
 
-Os assistentes virtuais no setor financeiro estão evoluindo de simples chatbots reativos para **agentes inteligentes e proativos**. Neste desafio, você vai idealizar e prototipar um agente financeiro que utiliza IA Generativa para:
+No Brasil, controlar o dinheiro não é opcional — é necessidade.
 
-- **Antecipar necessidades** ao invés de apenas responder perguntas
-- **Personalizar** sugestões com base no contexto de cada cliente
-- **Cocriar soluções** financeiras de forma consultiva
-- **Garantir segurança** e confiabilidade nas respostas (anti-alucinação)
+Entre boletos, PIX, cartão de crédito, mercado e imprevistos, o brasileiro vive fazendo conta para garantir que o mês feche no azul.
 
-> [!TIP]
-> Na pasta [`examples/`](./examples/) você encontra referências de implementação para cada etapa deste desafio.
+Este projeto propõe a criação de um **Agente Financeiro Inteligente**, focado no cotidiano, que utiliza IA Generativa para analisar extratos bancários e transformar dados brutos em:
+
+- 📊 Resumo claro de gastos  
+- 🧾 Organização automática por categorias  
+- ⚠️ Alertas sobre excessos e padrões recorrentes  
+- 📅 Projeção de fechamento do mês  
+- 💡 Recomendações práticas e realistas  
+
+> O objetivo não é sugerir investimentos, mas ajudar o usuário a organizar o presente antes de planejar o futuro.
 
 ---
 
-## O Que Você Deve Entregar
+## 🎯 Problema que o Projeto Resolve
 
-### 1. Documentação do Agente
+Muitas pessoas:
+
+- Não sabem exatamente quanto gastam por categoria  
+- Descobrem que o dinheiro acabou apenas no fim do mês  
+- Não têm clareza sobre gastos fixos e variáveis  
+- Vivem no “acho que deu”  
+
+O agente resolve isso transformando o extrato bancário em:
+
+- Visão consolidada  
+- Diagnóstico financeiro mensal  
+- Alertas inteligentes  
+- Recomendações acionáveis  
+
+---
+
+## 📦 O Que Você Deve Entregar
+
+### 1️⃣ Documentação do Agente
 
 Defina **o que** seu agente faz e **como** ele funciona:
 
-- **Caso de Uso:** Qual problema financeiro ele resolve? (ex: consultoria de investimentos, planejamento de metas, alertas de gastos)
-- **Persona e Tom de Voz:** Como o agente se comporta e se comunica?
-- **Arquitetura:** Fluxo de dados e integração com a base de conhecimento
-- **Segurança:** Como evitar alucinações e garantir respostas confiáveis?
+- **Caso de Uso:**  
+  Organização financeira mensal a partir da análise de extrato bancário.
 
-📄 **Template:** [`docs/01-documentacao-agente.md`](./docs/01-documentacao-agente.md)
+- **Problema Resolvido:**  
+  Falta de clareza sobre fluxo de caixa pessoal.
+
+- **Persona e Tom de Voz:**  
+  Linguagem simples, brasileira, próxima e levemente bem-humorada, mantendo responsabilidade.  
+  Exemplo:  
+  > “Seu gasto com delivery já virou assinatura mensal, hein 👀”
+
+- **Arquitetura:**  
+  - Upload de extrato (CSV)  
+  - Processamento e categorização das transações  
+  - Análise via LLM  
+  - Geração de diagnóstico e recomendações  
+
+- **Segurança:**  
+  - Nunca inventar valores  
+  - Responder apenas com base nos dados fornecidos  
+  - Indicar quando não houver informação suficiente  
+
+📄 `docs/01-documentacao-agente.md`
 
 ---
 
-### 2. Base de Conhecimento
+### 2️⃣ Base de Conhecimento
 
-Utilize os **dados mockados** disponíveis na pasta [`data/`](./data/) para alimentar seu agente:
+Utilize os dados disponíveis na pasta `data/`:
 
 | Arquivo | Formato | Descrição |
-|---------|---------|-----------|
-| `extratos` | CSV | Histórico de extratos do cliente |
-| `historico_atendimento.csv` | CSV | Histórico de atendimentos anteriores |
+|----------|----------|------------|
+| `extrato.csv` | CSV | Histórico de transações do usuário |
+| `categorias.json` | JSON | Regras para categorização automática |
+| `perfil_usuario.json` | JSON | Informações básicas do usuário (opcional) |
 
-Você pode adaptar ou expandir esses dados conforme seu caso de uso.
+O foco é a análise comportamental de gastos, não produtos financeiros.
 
-📄 **Template:** [`docs/02-base-conhecimento.md`](./docs/02-base-conhecimento.md)
-
----
-
-### 3. Prompts do Agente
-
-Documente os prompts que definem o comportamento do seu agente:
-
-- **System Prompt:** Instruções gerais de comportamento e restrições
-- **Exemplos de Interação:** Cenários de uso com entrada e saída esperada
-- **Tratamento de Edge Cases:** Como o agente lida com situações limite
-
-📄 **Template:** [`docs/03-prompts.md`](./docs/03-prompts.md)
+📄 `docs/02-base-conhecimento.md`
 
 ---
 
-### 4. Aplicação Funcional
+### 3️⃣ Prompts do Agente
 
-Desenvolva um **protótipo funcional** do seu agente:
+Documente os prompts que definem o comportamento do agente:
 
-- Chatbot interativo (sugestão: Streamlit, Gradio ou similar)
-- Integração com LLM (via API ou modelo local)
-- Conexão com a base de conhecimento
+- **System Prompt**
+  - Proibido inventar dados  
+  - Sempre basear respostas no extrato  
+  - Linguagem clara e acessível  
+  - Recomendações práticas e objetivas  
 
-📁 **Pasta:** [`src/`](./src/)
+- **Exemplos de Interação**
+  - “Quanto eu gastei com alimentação este mês?”  
+  - “Estou gastando muito com delivery?”  
+  - “Se continuar assim, vou fechar no vermelho?”  
+  - “Quais são meus gastos fixos?”  
 
----
+- **Tratamento de Edge Cases**
+  - Extrato incompleto  
+  - Dados duplicados  
+  - Valores inconsistentes  
+  - Perguntas fora do escopo financeiro  
 
-### 5. Avaliação e Métricas
-
-Descreva como você avalia a qualidade do seu agente:
-
-**Métricas Sugeridas:**
-- Precisão/assertividade das respostas
-- Taxa de respostas seguras (sem alucinações)
-- Coerência com o perfil do cliente
-
-📄 **Template:** [`docs/04-metricas.md`](./docs/04-metricas.md)
-
----
-
-### 6. Pitch
-
-Grave um **pitch de 3 minutos** (estilo elevador) apresentando:
-
-- Qual problema seu agente resolve?
-- Como ele funciona na prática?
-- Por que essa solução é inovadora?
-
-📄 **Template:** [`docs/05-pitch.md`](./docs/05-pitch.md)
+📄 `docs/03-prompts.md`
 
 ---
 
-## Ferramentas Sugeridas
+### 4️⃣ Aplicação Funcional
 
-Todas as ferramentas abaixo possuem versões gratuitas:
+Desenvolva um protótipo funcional:
+
+- Interface simples (ex: Streamlit)  
+- Upload de extrato em CSV  
+- Processamento automático das transações  
+- Integração com LLM  
+- Geração de resumo financeiro e diagnóstico mensal  
+
+📁 `src/`
+
+---
+
+### 5️⃣ Avaliação e Métricas
+
+Descreva como você avalia a qualidade do agente.
+
+**Métricas sugeridas:**
+
+- 📊 Precisão nos cálculos  
+- 🔒 Zero alucinação financeira  
+- 🧠 Coerência com os dados fornecidos  
+- 📉 Capacidade de identificar padrões reais  
+- 🧾 Clareza das recomendações  
+
+📄 `docs/04-metricas.md`
+
+---
+
+### 6️⃣ Pitch
+
+Grave um pitch de até 3 minutos apresentando:
+
+- Qual problema real do brasileiro o agente resolve?  
+- Como ele transforma extrato em inteligência?  
+- Por que essa solução é útil no dia a dia?  
+- Qual o diferencial (linguagem próxima + foco no cotidiano)?  
+
+📄 `docs/05-pitch.md`
+
+---
+
+## 🛠 Ferramentas Sugeridas
 
 | Categoria | Ferramentas |
 |-----------|-------------|
-| **LLMs** | [ChatGPT](https://chat.openai.com/), [Copilot](https://copilot.microsoft.com/), [Gemini](https://gemini.google.com/), [Claude](https://claude.ai/), [Ollama](https://ollama.ai/) |
-| **Desenvolvimento** | [Streamlit](https://streamlit.io/), [Gradio](https://www.gradio.app/), [Google Colab](https://colab.research.google.com/) |
-| **Orquestração** | [LangChain](https://www.langchain.com/), [LangFlow](https://www.langflow.org/), [CrewAI](https://www.crewai.com/) |
-| **Diagramas** | [Mermaid](https://mermaid.js.org/), [Draw.io](https://app.diagrams.net/), [Excalidraw](https://excalidraw.com/) |
+| **LLMs** | ChatGPT, Gemini, Claude, Copilot, Ollama |
+| **Desenvolvimento** | Streamlit, Gradio, Google Colab |
+| **Orquestração** | LangChain, LangFlow, CrewAI |
+| **Diagramas** | Mermaid, Draw.io, Excalidraw |
 
 ---
 
-## Estrutura do Repositório
+## 🗂 Estrutura do Repositório
 
-```
-📁 lab-agente-financeiro/
-│
-├── 📄 README.md
-│
-├── 📁 data/                          # Dados mockados para o agente
-│   ├── historico_atendimento.csv     # Histórico de atendimentos (CSV)
-│   ├── perfil_investidor.json        # Perfil do cliente (JSON)
-│   ├── produtos_financeiros.json     # Produtos disponíveis (JSON)
-│   └── transacoes.csv                # Histórico de transações (CSV)
-│
-├── 📁 docs/                          # Documentação do projeto
-│   ├── 01-documentacao-agente.md     # Caso de uso e arquitetura
-│   ├── 02-base-conhecimento.md       # Estratégia de dados
-│   ├── 03-prompts.md                 # Engenharia de prompts
-│   ├── 04-metricas.md                # Avaliação e métricas
-│   └── 05-pitch.md                   # Roteiro do pitch
-│
-├── 📁 src/                           # Código da aplicação
-│   └── app.py                        # (exemplo de estrutura)
-│
-├── 📁 assets/                        # Imagens e diagramas
-│   └── ...
-│
-└── 📁 examples/                      # Referências e exemplos
-    └── README.md
-```
-
----
-
-## Dicas Finais
-
-1. **Comece pelo prompt:** Um bom system prompt é a base de um agente eficaz
-2. **Use os dados mockados:** Eles garantem consistência e evitam problemas com dados sensíveis
-3. **Foque na segurança:** No setor financeiro, evitar alucinações é crítico
-4. **Teste cenários reais:** Simule perguntas que um cliente faria de verdade
-5. **Seja direto no pitch:** 3 minutos passam rápido, vá ao ponto
